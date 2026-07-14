@@ -44,7 +44,11 @@ document.addEventListener('DOMContentLoaded', function(){
     var category = window.location.hash.slice(1);
     if(category) selectCategory(category, true);
   }
-  selectCategoryFromHash();
+  if(window.location.hash){
+    selectCategoryFromHash();
+  } else {
+    window.scrollTo(0, 0);
+  }
   window.addEventListener('hashchange', selectCategoryFromHash);
 
   var form = document.getElementById('contactForm');
@@ -86,10 +90,15 @@ document.addEventListener('DOMContentLoaded', function(){
         'Correo: ' + email + '\n\n' +
         'Mensaje:\n' + message;
 
-      status.textContent = 'Abriendo WhatsApp para enviar tu solicitud.';
-      window.open('https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(body), '_blank', 'noopener');
-      form.reset();
-      toggleOtherProductField();
+      var whatsappUrl = 'https://api.whatsapp.com/send?phone=' + whatsappNumber + '&text=' + encodeURIComponent(body);
+      status.textContent = 'Abriendo WhatsApp para enviar tu solicitud...';
+      var opened = window.open(whatsappUrl, '_blank', 'noopener');
+      if (!opened) {
+        status.innerHTML = 'Tu navegador bloqueó la apertura de la ventana. <a href="' + whatsappUrl + '" target="_blank" rel="noopener" class="text-link">Haz clic aquí para enviar por WhatsApp</a>';
+      } else {
+        form.reset();
+        toggleOtherProductField();
+      }
     });
   }
 });
