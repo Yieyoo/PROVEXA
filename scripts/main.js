@@ -50,13 +50,29 @@ document.addEventListener('DOMContentLoaded', function(){
   var form = document.getElementById('contactForm');
   if(form){
     var status = document.getElementById('formStatus');
+    var productTypeSelect = form.productType;
+    var otherProductField = document.getElementById('otherProductField');
+    var otherProductInput = form.otherProduct;
+
+    function toggleOtherProductField(){
+      var isOtherProduct = productTypeSelect.value === 'Otro producto';
+      otherProductField.hidden = !isOtherProduct;
+      otherProductInput.disabled = !isOtherProduct;
+      otherProductInput.required = isOtherProduct;
+      if(!isOtherProduct) otherProductInput.value = '';
+    }
+
+    productTypeSelect.addEventListener('change', toggleOtherProductField);
     form.addEventListener('submit', function(e){
       e.preventDefault();
       var name = form.name.value.trim();
       var company = form.company.value.trim();
+      var productType = form.productType.value;
+      var otherProduct = form.otherProduct.value.trim();
+      var serviceType = form.serviceType.value;
       var email = form.email.value.trim();
       var message = form.message.value.trim();
-      if(!name || !email || !message){
+      if(!name || !productType || !serviceType || !email || !message || (productType === 'Otro producto' && !otherProduct)){
         status.textContent = 'Por favor completa los campos requeridos.';
         return;
       }
@@ -65,12 +81,15 @@ document.addEventListener('DOMContentLoaded', function(){
       var body = '*Nueva solicitud de cotización desde el sitio web*\n\n' +
         'Nombre: ' + name + '\n' +
         'Empresa: ' + (company || 'No indicada') + '\n' +
+        'Producto que busca: ' + (productType === 'Otro producto' ? otherProduct : productType) + '\n' +
+        'Servicio requerido: ' + serviceType + '\n' +
         'Correo: ' + email + '\n\n' +
         'Mensaje:\n' + message;
 
       status.textContent = 'Abriendo WhatsApp para enviar tu solicitud.';
       window.open('https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(body), '_blank', 'noopener');
       form.reset();
+      toggleOtherProductField();
     });
   }
 });

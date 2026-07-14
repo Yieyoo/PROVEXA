@@ -98,90 +98,16 @@
         </div>
       </section>
 
-      <section class="why-choose section">
-        <div class="container">
-          <div>
-            <p class="eyebrow">¿POR QUÉ ELEGIR PROVEXA?</p>
-            <h3 class="section-title">Soluciones que impulsan tu crecimiento</h3>
-            <p class="section-sub">En PROVEXA trabajamos para ser tu mejor aliado, ofreciendo productos de calidad, atención personalizada y entregas rápidas y confiables.</p>
-            <a href="#about" class="btn primary about-cta">Conoce más sobre nosotros</a>
-          </div>
-          <div class="features-grid">
-            <div class="feature-card">
-              <span class="feature-icon">🏆</span>
-              <h5>Calidad garantizada</h5>
-              <p>Productos de la mejor calidad.</p>
-            </div>
-            <div class="feature-card">
-              <span class="feature-icon">🚚</span>
-              <h5>Entregas rápidas</h5>
-              <p>Cumplimos tus tiempos de entrega.</p>
-            </div>
-            <div class="feature-card">
-              <span class="feature-icon">🤝</span>
-              <h5>Atención personalizada</h5>
-              <p>Asesoría especializada para tu empresa.</p>
-            </div>
-            <div class="feature-card">
-              <span class="feature-icon">📦</span>
-              <h5>Amplio inventario</h5>
-              <p>Miles de productos disponibles.</p>
-            </div>
-            <div class="feature-card">
-              <span class="feature-icon">💲</span>
-              <h5>Precios competitivos</h5>
-              <p>Las mejores soluciones al mejor precio.</p>
-            </div>
-            <div class="feature-card">
-              <span class="feature-icon">🏭</span>
-              <h5>Soluciones empresariales</h5>
-              <p>Atención a empresas, industria y gobierno.</p>
-            </div>
-            <div class="feature-card">
-              <span class="feature-icon">📈</span>
-              <h5>Asesoría estratégica</h5>
-              <p>Planeación para compras y proyectos industriales.</p>
-            </div>
-            <div class="feature-card">
-              <span class="feature-icon">🔧</span>
-              <h5>Atención técnica</h5>
-              <p>Soporte especializado para operaciones y mantenimiento.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="stats-strip">
-        <div class="container stats-inner">
-          <div class="stat">
-            <div class="stat-icon">🎯</div>
-            <div class="stat-number">500+</div>
-            <div class="stat-label">Clientes satisfechos</div>
-          </div>
-          <div class="stat">
-            <div class="stat-icon">📦</div>
-            <div class="stat-number">10,000+</div>
-            <div class="stat-label">Productos disponibles</div>
-          </div>
-          <div class="stat">
-            <div class="stat-icon">⏰</div>
-            <div class="stat-number">24/7</div>
-            <div class="stat-label">Atención especializada</div>
-          </div>
-          <div class="stat">
-            <div class="stat-icon">✔️</div>
-            <div class="stat-number">100%</div>
-            <div class="stat-label">Compromiso de calidad</div>
-          </div>
-        </div>
-      </section>
-
       <section class="cta-banner">
         <div class="container cta-inner">
           <div>
             <p class="eyebrow">¿LISTO PARA IMPULSAR TU EMPRESA?</p>
             <h3>Solicita tu cotización hoy mismo</h3>
             <p>Nuestro equipo está listo para ayudarte.</p>
+          </div>
+          <div class="cta-benefits" aria-label="Beneficios de PROVEXA">
+            <div class="cta-benefit"><strong>24/7</strong><span>Atención especializada</span></div>
+            <div class="cta-benefit"><strong>100%</strong><span>Compromiso de calidad</span></div>
           </div>
           <a href="#contact" class="btn primary">Solicitar cotización</a>
         </div>
@@ -322,10 +248,12 @@
       </section>
 
       <section id="services" class="services-features section">
-        <div class="container two-col">
-          <div>
+        <div class="container">
+          <div class="services-intro">
             <h3 class="section-title">Nuestros servicios</h3>
             <p class="section-sub">Soluciones para cada necesidad: venta al mayoreo, cotizaciones empresariales, suministro continuo, entrega programada y atención a gobierno e industria.</p>
+          </div>
+          <div class="services-layout">
             <div class="services-grid">
               <details class="service-item">
                 <summary><span class="service-number">01</span><span>Venta al mayoreo</span></summary>
@@ -352,9 +280,9 @@
                 <p>Asesoría para identificar el producto o solución más adecuada para cada requerimiento.</p>
               </details>
             </div>
-          </div>
           <div class="about-image">
             <img src="assets/hero.png" alt="PROVEXA almacén">
+          </div>
           </div>
         </div>
       </section>
@@ -383,6 +311,32 @@
               </label>
               <label>Correo electrónico
                 <input type="email" name="email" autocomplete="email" required>
+              </label>
+              <label>¿Qué tipo de producto buscas?
+                <select name="productType" required>
+                  <option value="" selected disabled>Selecciona una categoría</option>
+                  <option>Jarciería y limpieza</option>
+                  <option>Tornillería y fijación</option>
+                  <option>Ferretería y herramienta</option>
+                  <option>Pinturas y recubrimientos</option>
+                  <option>Material eléctrico</option>
+                  <option>Lubricantes</option>
+                  <option>Otro producto</option>
+                </select>
+              </label>
+              <label id="otherProductField" hidden>¿Qué producto buscas?
+                <input type="text" name="otherProduct" disabled placeholder="Escribe el producto que necesitas">
+              </label>
+              <label>¿Qué tipo de servicio buscas?
+                <select name="serviceType" required>
+                  <option value="" selected disabled>Selecciona un servicio</option>
+                  <option>Venta al mayoreo</option>
+                  <option>Cotizaciones empresariales</option>
+                  <option>Suministro continuo</option>
+                  <option>Entrega programada</option>
+                  <option>Gestión de inventario</option>
+                  <option>Soporte técnico</option>
+                </select>
               </label>
               <label>Mensaje
                 <textarea name="message" rows="4" required></textarea>
