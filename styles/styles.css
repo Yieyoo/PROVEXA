@@ -8,6 +8,7 @@
 *{box-sizing:border-box}
 body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line-height:1.5;color:var(--navy);background:var(--white);margin:0}
 .container{width:90%;max-width:var(--max-width);margin:0 auto}
+:focus-visible{outline:3px solid #0f3b75;outline-offset:3px}
 
 /* Header */
 .site-header{border-bottom:1px solid rgba(8,42,102,0.12);background:rgba(255,255,255,0.96);backdrop-filter:blur(10px);position:sticky;top:0;z-index:40}
@@ -37,18 +38,14 @@ body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line
 .lead{color:var(--silver);margin-bottom:22px;max-width:580px}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
 .hero-ctas .btn{min-width:170px}
-.lead{color:var(--silver);margin-bottom:18px}
-.hero-ctas{display:flex;gap:12px}
 .btn{display:inline-block;padding:10px 18px;border-radius:6px;text-decoration:none;font-weight:600}
 .btn.primary{background:var(--navy);color:var(--white)}
 .btn.ghost{background:transparent;border:1px solid var(--navy);color:var(--navy)}
 
-.hero-cards{display:flex;flex-direction:column;gap:10px}
-.card{background:#fff;border:1px solid #eef2f6;padding:16px;border-radius:8px;color:var(--navy);box-shadow:0 6px 18px rgba(8,42,102,0.06)}
-
 /* Sections */
 .section{padding:38px 0}
 .section.light{background:#fbfdff}
+[id]{scroll-margin-top:100px}
 .section-title{margin:0 0 10px;font-size:1.28rem;letter-spacing:0.01em}
 .section-sub{color:var(--silver);margin-bottom:18px;max-width:680px}
 .eyebrow{margin:0;font-size:0.85rem;letter-spacing:1.5px;text-transform:uppercase;color:#0f3b75;font-weight:700}
@@ -60,10 +57,6 @@ body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line
 .icon-card img{width:44px;height:44px;margin-bottom:12px}
 .icon-card span{font-weight:700;text-transform:uppercase;letter-spacing:.35px}
 
-.services-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:24px}
-.service-card{background:#fff;border:1px solid #eef2f6;border-radius:18px;padding:22px;box-shadow:0 14px 32px rgba(8,42,102,0.08);min-height:180px;display:flex;flex-direction:column;gap:12px}
-.service-card h5{margin:0;font-size:1.04rem}
-.service-card p{color:var(--silver);line-height:1.6}
 .service-icon{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:14px;background:#e9eff8;color:var(--navy);font-size:1.25rem}
 
  .icon-action{margin-top:20px;text-align:center}
@@ -72,8 +65,8 @@ body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line
  
  .why-choose .eyebrow,
  .cta-banner .eyebrow{font-size:0.85rem;letter-spacing:1.5px;text-transform:uppercase;color:#0f3b75;margin-bottom:12px;font-weight:700}
- .why-choose .two-col{grid-template-columns:1fr !important}
  .why-choose .features-grid{margin-top:32px}
+ .about-cta{margin-top:18px}
  .highlight{color:#0b1c4f}
  .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:24px}
  .feature-card{background:#fff;border:1px solid #eef2f6;border-radius:16px;padding:20px;box-shadow:0 12px 30px rgba(8,42,102,0.08);min-height:180px}
@@ -102,6 +95,8 @@ body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line
 .footer-top-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:24px}
 .footer-col h5{margin:0 0 12px;font-size:1rem;color:#fff}
 .footer-col p, .footer-col a{color:#c5d2ef;text-decoration:none;line-height:1.8}
+.footer-logo{width:140px;margin-bottom:8px}
+.footer-intro{max-width:360px;color:#bfc7d9}
 .footer-links ul{list-style:none;padding:0;margin:0}
 .footer-links li{margin-bottom:10px}
 
@@ -111,12 +106,10 @@ body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line
 
 .about-image img{width:100%;border-radius:16px;}
 
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;padding:0;margin:18px 0;list-style:none}
-.services-grid li{background:#fff;border:1px solid #eef2f6;padding:14px;border-radius:8px;color:var(--navy)}
-
 .products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
-.product{background:#fff;border:1px solid #eef2f6;border-radius:8px;padding:16px}
+.product{background:#fff;border:1px solid #eef2f6;border-radius:8px;padding:16px;display:flex;flex-direction:column}
 .product-image{height:120px;background:linear-gradient(135deg,var(--navy),var(--silver));border-radius:6px;margin-bottom:12px}
+.product-cta{align-self:flex-start;margin-top:auto}
 
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
 .two-col > div:first-child{max-width:none}
@@ -128,16 +121,15 @@ body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line
 .category h4{margin:0 0 8px;font-size:1.05rem;color:var(--navy)}
 .category ul{margin:0;padding-left:18px;color:var(--silver)}
 .category li{margin-bottom:6px;color:var(--navy);font-weight:600}
+.catalog-cta{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:28px;text-align:center}
+.catalog-cta p{margin:0;font-weight:600}
 
 .cat-icon{width:28px;height:28px;vertical-align:middle;margin-right:8px;display:inline-block}
 
 .contact-form{display:flex;flex-direction:column;gap:10px}
 .contact-form label{display:flex;flex-direction:column;font-size:0.9rem}
 .contact-form input,.contact-form textarea{padding:8px;border:1px solid #ddd;border-radius:6px}
-
-/* Footer */
-.site-footer{background:#f5f7fb;padding:22px 0;border-top:1px solid #eee}
-.footer-inner{display:flex;justify-content:space-between;gap:16px;align-items:center}
+.form-status{min-height:1.5em;margin:0;color:var(--navy);font-size:.9rem}
 
 /* Responsive */
 @media (max-width:900px){
@@ -145,9 +137,15 @@ body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line
   .two-col{grid-template-columns:1fr}
 }
 @media (max-width:700px){
+  .header-inner{position:relative;padding:12px 0}
+  .logo{width:58px}
+  .brand{gap:8px}
+  .brand-text h1{font-size:1rem}
+  .tag{font-size:0.6rem}
   .nav ul{display:none}
-  .nav.open ul{display:flex;flex-direction:column;background:#fff;position:absolute;right:20px;top:68px;padding:12px;border-radius:8px;box-shadow:0 8px 24px rgba(8,42,102,0.08)}
-  .nav-toggle{display:block}
+  .nav.open ul{display:flex;flex-direction:column;background:#fff;position:absolute;right:0;top:calc(100% + 12px);min-width:220px;padding:16px;border-radius:8px;box-shadow:0 8px 24px rgba(8,42,102,0.12)}
+  .header-btn{display:none}
+  .nav-toggle{display:block;padding:8px;line-height:1}
 }
 
 /* Utilities */

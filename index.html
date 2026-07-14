@@ -3,8 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>PROVEXA — Proveedora por Excelencia</title>
-    <meta name="description" content="PROVEXA — Suministros empresariales: limpieza, mantenimiento, herramientas, material eléctrico y más." />
+    <title>PROVEXA | Suministros industriales y empresariales</title>
+    <meta name="description" content="PROVEXA ofrece suministros empresariales e industriales: limpieza, mantenimiento, herramientas, material eléctrico y más." />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#082A66" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PROVEXA | Suministros industriales y empresariales" />
+    <meta property="og:description" content="Soluciones integrales de suministro para empresas, industria, oficinas y comercios." />
+    <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
@@ -31,7 +38,7 @@
           </ul>
         </nav>
         <a class="btn primary header-btn" href="#contact">Solicitar cotización</a>
-        <button id="navToggle" class="nav-toggle" aria-label="Abrir menú">☰</button>
+        <button id="navToggle" class="nav-toggle" type="button" aria-label="Abrir menú" aria-controls="mainNav" aria-expanded="false">☰</button>
       </div>
     </header>
 
@@ -60,23 +67,23 @@
           <h3 class="section-title">Nuestras categorías</h3>
           <p class="section-sub">Todo lo que tu empresa necesita</p>
           <div class="icon-cards-row">
-            <a class="icon-card" href="#catalog">
+            <a class="icon-card" href="#limpieza">
               <img src="assets/icons/jarceria.svg" alt="Limpieza">
               <span>Limpieza</span>
             </a>
-            <a class="icon-card" href="#catalog">
+            <a class="icon-card" href="#services">
               <img src="assets/icons/mantenimiento.svg" alt="Mantenimiento">
               <span>Mantenimiento</span>
             </a>
-            <a class="icon-card" href="#catalog">
+            <a class="icon-card" href="#herramientas">
               <img src="assets/icons/herramientas.svg" alt="Herramientas">
               <span>Herramientas</span>
             </a>
-            <a class="icon-card" href="#catalog">
+            <a class="icon-card" href="#electrico">
               <img src="assets/icons/electrico.svg" alt="Material eléctrico">
               <span>Material eléctrico</span>
             </a>
-            <a class="icon-card" href="#catalog">
+            <a class="icon-card" href="#electrico">
               <img src="assets/icons/cables.svg" alt="Cables">
               <span>Cables</span>
             </a>
@@ -97,7 +104,7 @@
             <p class="eyebrow">¿POR QUÉ ELEGIR PROVEXA?</p>
             <h3 class="section-title">Soluciones que impulsan tu crecimiento</h3>
             <p class="section-sub">En PROVEXA trabajamos para ser tu mejor aliado, ofreciendo productos de calidad, atención personalizada y entregas rápidas y confiables.</p>
-            <a href="#about" class="btn primary" style="margin-top:18px;">Conoce más sobre nosotros</a>
+            <a href="#about" class="btn primary about-cta">Conoce más sobre nosotros</a>
           </div>
           <div class="features-grid">
             <div class="feature-card">
@@ -182,8 +189,11 @@
 
       <section id="catalog" class="section">
         <div class="container">
+          <p class="eyebrow">NUESTRO CATÁLOGO</p>
+          <h3 class="section-title">Productos para cada operación</h3>
+          <p class="section-sub">Explora nuestras principales líneas de suministro y solicita una cotización acorde con tus necesidades.</p>
           <div class="categories-grid">
-            <div class="category">
+            <div id="limpieza" class="category">
               <h4><img src="assets/icons/jarceria.svg" class="cat-icon" alt="Jarcería"> Jarciería y limpieza</h4>
               <ul>
                 <li>Escobas</li>
@@ -198,7 +208,7 @@
               </ul>
             </div>
 
-            <div class="category">
+            <div id="fijacion" class="category">
               <h4>🔩 Tornillería y fijación</h4>
               <ul>
                 <li>Tornillos</li>
@@ -212,7 +222,7 @@
               </ul>
             </div>
 
-            <div class="category">
+            <div id="herramientas" class="category">
               <h4>🛠️ Ferretería y herramienta</h4>
               <ul>
                 <li>Herramienta manual</li>
@@ -226,7 +236,7 @@
               </ul>
             </div>
 
-            <div class="category">
+            <div id="pinturas" class="category">
               <h4>🎨 Pinturas y recubrimientos</h4>
               <ul>
                 <li>Pintura industrial</li>
@@ -239,7 +249,7 @@
               </ul>
             </div>
 
-            <div class="category">
+            <div id="electrico" class="category">
               <h4>⚡ Material eléctrico</h4>
               <ul>
                 <li>Cable</li>
@@ -253,7 +263,7 @@
               </ul>
             </div>
 
-            <div class="category">
+            <div id="lubricantes" class="category">
               <h4>🛢️ Lubricantes</h4>
               <ul>
                 <li>Aceites industriales</li>
@@ -263,6 +273,10 @@
                 <li>Anticorrosivos</li>
               </ul>
             </div>
+          </div>
+          <div class="catalog-cta">
+            <p>¿No encuentras lo que necesitas?</p>
+            <a href="#contact" class="btn primary">Solicitar una cotización</a>
           </div>
         </div>
       </section>
@@ -275,21 +289,25 @@
               <div class="product-image"></div>
               <h4>Kit de limpieza industrial</h4>
               <p>Soluciones completas para plantas y bodegas.</p>
+              <a href="#contact" class="btn ghost product-cta">Cotizar producto</a>
             </article>
             <article class="product">
               <div class="product-image"></div>
               <h4>Cables y conductores</h4>
               <p>Calidad certificada y envíos a todo México.</p>
+              <a href="#contact" class="btn ghost product-cta">Cotizar producto</a>
             </article>
             <article class="product">
               <div class="product-image"></div>
               <h4>Herramientas manuales</h4>
               <p>Marcas reconocidas y garantías.</p>
+              <a href="#contact" class="btn ghost product-cta">Cotizar producto</a>
             </article>
             <article class="product">
               <div class="product-image"></div>
               <h4>Equipo de seguridad</h4>
               <p>Protección industrial para tu personal.</p>
+              <a href="#contact" class="btn ghost product-cta">Cotizar producto</a>
             </article>
           </div>
         </div>
@@ -334,7 +352,7 @@
             </div>
           </div>
           <div class="about-image">
-            <img src="assets/hero.png" alt="PROVEXA almacén" style="width:100%;border-radius:8px;">
+            <img src="assets/hero.png" alt="PROVEXA almacén">
           </div>
         </div>
       </section>
@@ -353,18 +371,22 @@
           <div class="about-contact" id="contact">
             <h4>Contacto</h4>
             <p>Email: <a href="mailto:ventas@provexa.mx">ventas@provexa.mx</a></p>
-            <p>Tel: +52 55 1234 5678</p>
+            <p>Tel: <a href="tel:+5215611660078">+52 1 56 1166 0078</a></p>
             <form id="contactForm" class="contact-form">
               <label>Nombre
-                <input type="text" name="name" required>
+                <input type="text" name="name" autocomplete="name" required>
               </label>
               <label>Empresa
-                <input type="text" name="company">
+                <input type="text" name="company" autocomplete="organization">
+              </label>
+              <label>Correo electrónico
+                <input type="email" name="email" autocomplete="email" required>
               </label>
               <label>Mensaje
                 <textarea name="message" rows="4" required></textarea>
               </label>
-              <button class="btn primary" type="submit">Enviar</button>
+              <button class="btn primary" type="submit">Enviar por WhatsApp</button>
+              <p id="formStatus" class="form-status" aria-live="polite"></p>
             </form>
           </div>
         </div>
@@ -375,8 +397,8 @@
       <div class="footer-top">
         <div class="container footer-top-inner">
           <div class="footer-col">
-            <img src="assets/logo.png" alt="PROVEXA" style="width:140px;margin-bottom:8px">
-            <p style="max-width:360px;color:#bfc7d9">Soluciones integrales en suministros para empresas, industrias, oficinas y comercios.</p>
+            <img src="assets/logo.png" alt="PROVEXA" class="footer-logo">
+            <p class="footer-intro">Soluciones integrales en suministros para empresas, industrias, oficinas y comercios.</p>
           </div>
           <div class="footer-col footer-links">
             <h5>Enlaces</h5>
@@ -389,7 +411,7 @@
           </div>
           <div class="footer-col">
             <h5>Contacto</h5>
-            <p>55 1234 5678</p>
+            <p><a href="tel:+5215611660078">+52 1 56 1166 0078</a></p>
             <p><a href="mailto:ventas@provexa.mx">ventas@provexa.mx</a></p>
             <p>Av. Industrial 123, CDMX</p>
           </div>
