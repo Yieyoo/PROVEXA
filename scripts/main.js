@@ -17,6 +17,36 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }
 
+  var catalogTabs = Array.from(document.querySelectorAll('.catalog-tab'));
+  var catalogPanels = Array.from(document.querySelectorAll('.catalog-panel'));
+  function selectCategory(category, shouldScroll){
+    var selectedPanel = document.getElementById(category);
+    if(!selectedPanel || !selectedPanel.classList.contains('catalog-panel')) return;
+
+    catalogTabs.forEach(function(tab){
+      var isSelected = tab.dataset.category === category;
+      tab.classList.toggle('is-active', isSelected);
+      tab.setAttribute('aria-selected', String(isSelected));
+    });
+    catalogPanels.forEach(function(panel){
+      panel.hidden = panel.id !== category;
+    });
+    if(shouldScroll) selectedPanel.scrollIntoView({behavior: 'smooth', block: 'start'});
+  }
+
+  catalogTabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      selectCategory(tab.dataset.category, false);
+    });
+  });
+
+  function selectCategoryFromHash(){
+    var category = window.location.hash.slice(1);
+    if(category) selectCategory(category, true);
+  }
+  selectCategoryFromHash();
+  window.addEventListener('hashchange', selectCategoryFromHash);
+
   var form = document.getElementById('contactForm');
   if(form){
     var status = document.getElementById('formStatus');
