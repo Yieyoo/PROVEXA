@@ -1,4 +1,43 @@
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
+var lastFocusedElement = null;
+
+function resetPageState() {
+  if (!window.location.hash) {
+    window.scrollTo(0, 0);
+  }
+
+  var modal = document.getElementById('catalogModal');
+  if (modal) {
+    modal.classList.add('modal-hidden');
+    modal.setAttribute('aria-hidden', 'true');
+    if ('inert' in modal) {
+      modal.inert = true;
+    }
+  }
+
+  var pageContent = document.querySelector('main');
+  if (pageContent) {
+    pageContent.removeAttribute('aria-hidden');
+  }
+
+  document.body.classList.remove('no-scroll');
+  lastFocusedElement = null;
+}
+
+window.addEventListener('pageshow', function(event) {
+  if (event.persisted) {
+    resetPageState();
+  }
+});
+
+window.addEventListener('load', resetPageState);
+
 document.addEventListener('DOMContentLoaded', function(){
+  resetPageState();
+
   var nav = document.getElementById('mainNav');
   var toggle = document.getElementById('navToggle');
   if(nav && toggle){
@@ -19,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
   var catalogTabs = Array.from(document.querySelectorAll('.catalog-tab'));
   var catalogPanels = Array.from(document.querySelectorAll('.catalog-panel'));
+
   function selectCategory(category, shouldScroll){
     var selectedPanel = document.getElementById(category);
     if(!selectedPanel || !selectedPanel.classList.contains('catalog-panel')) return;
@@ -34,11 +74,83 @@ document.addEventListener('DOMContentLoaded', function(){
     if(shouldScroll) selectedPanel.scrollIntoView({behavior: 'smooth', block: 'start'});
   }
 
+  function openCatalogModal(category){
+    var modal = document.getElementById('catalogModal');
+    var panel = document.getElementById(category);
+    if(!modal || !panel) return;
+
+    var modalTitle = modal.querySelector('.modal-title');
+    var modalList = modal.querySelector('.modal-list');
+    modalTitle.textContent = panel.querySelector('h4') ? panel.querySelector('h4').textContent : '';
+    modalList.innerHTML = '';
+    panel.querySelectorAll('li').forEach(function(item){
+      var listItem = document.createElement('li');
+      listItem.textContent = item.textContent;
+      modalList.appendChild(listItem);
+    });
+
+    lastFocusedElement = document.activeElement;
+    modal.classList.remove('modal-hidden');
+    modal.setAttribute('aria-hidden', 'false');
+    if ('inert' in modal) {
+      modal.inert = false;
+    }
+    var pageContent = document.querySelector('main');
+    if (pageContent) {
+      pageContent.setAttribute('aria-hidden', 'true');
+    }
+    document.body.classList.add('no-scroll');
+    var closeButton = modal.querySelector('[data-close]');
+    if(closeButton) closeButton.focus();
+  }
+
+  function closeCatalogModal(){
+    var modal = document.getElementById('catalogModal');
+    if(!modal) return;
+    modal.classList.add('modal-hidden');
+    modal.setAttribute('aria-hidden', 'true');
+    if ('inert' in modal) {
+      modal.inert = true;
+    }
+    var pageContent = document.querySelector('main');
+    if (pageContent) {
+      pageContent.removeAttribute('aria-hidden');
+    }
+    document.body.classList.remove('no-scroll');
+    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+      lastFocusedElement.focus();
+    }
+  }
+
   catalogTabs.forEach(function(tab){
     tab.addEventListener('click', function(){
-      selectCategory(tab.dataset.category, false);
+      catalogTabs.forEach(function(other){
+        other.classList.remove('is-active');
+        other.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('is-active');
+      tab.setAttribute('aria-selected', 'true');
+      openCatalogModal(tab.dataset.category);
     });
   });
+
+  var modal = document.getElementById('catalogModal');
+  if(modal){
+    modal.addEventListener('click', function(event){
+      if(event.target === modal){
+        closeCatalogModal();
+      }
+    });
+    var closeButton = modal.querySelector('[data-close]');
+    if(closeButton){
+      closeButton.addEventListener('click', closeCatalogModal);
+    }
+    document.addEventListener('keydown', function(event){
+      if(event.key === 'Escape' && !modal.classList.contains('modal-hidden')){
+        closeCatalogModal();
+      }
+    });
+  }
 
   function selectCategoryFromHash(){
     var category = window.location.hash.slice(1);

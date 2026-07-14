@@ -62,42 +62,6 @@
         </div>
       </section>
 
-      <section class="icon-cards">
-        <div class="container">
-          <h3 class="section-title">Nuestras categorías</h3>
-          <p class="section-sub">Todo lo que tu empresa necesita</p>
-          <div class="icon-cards-row">
-            <a class="icon-card" href="#limpieza">
-              <img src="assets/icons/jarceria.svg" alt="Limpieza">
-              <span>Limpieza</span>
-            </a>
-            <a class="icon-card" href="#services">
-              <img src="assets/icons/mantenimiento.svg" alt="Mantenimiento">
-              <span>Mantenimiento</span>
-            </a>
-            <a class="icon-card" href="#herramientas">
-              <img src="assets/icons/herramientas.svg" alt="Herramientas">
-              <span>Herramientas</span>
-            </a>
-            <a class="icon-card" href="#electrico">
-              <img src="assets/icons/electrico.svg" alt="Material eléctrico">
-              <span>Material eléctrico</span>
-            </a>
-            <a class="icon-card" href="#electrico">
-              <img src="assets/icons/cables.svg" alt="Cables">
-              <span>Cables</span>
-            </a>
-            <a class="icon-card" href="#catalog">
-              <img src="assets/icons/mas.svg" alt="Y más">
-              <span>Y más</span>
-            </a>
-          </div>
-          <div class="icon-action">
-            <a class="text-link" href="#catalog">Ver todas las categorías →</a>
-          </div>
-        </div>
-      </section>
-
       <section class="cta-banner">
         <div class="container cta-inner">
           <div>
@@ -208,6 +172,15 @@
               </ul>
             </div>
           </div>
+
+          <div id="catalogModal" class="modal-overlay modal-hidden" role="dialog" aria-modal="true" aria-labelledby="catalogModalTitle">
+            <div class="modal">
+              <button type="button" class="modal-close" aria-label="Cerrar" data-close>&times;</button>
+              <h4 id="catalogModalTitle" class="modal-title"></h4>
+              <ul class="modal-list"></ul>
+            </div>
+          </div>
+
           <div class="catalog-cta">
             <p>¿No encuentras lo que necesitas?</p>
             <a href="#contact" class="btn primary">Solicitar una cotización</a>
