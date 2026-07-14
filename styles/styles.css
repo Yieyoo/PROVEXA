@@ -152,25 +152,28 @@ body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line
   .brand-text h1{font-size:1rem}
   .tag{font-size:0.6rem}
   .nav ul{display:none}
-  .nav.open ul{display:flex;flex-direction:column;background:#fff;position:absolute;right:0;top:calc(100% + 12px);min-width:220px;padding:16px;border-radius:8px;box-shadow:0 8px 24px rgba(8,42,102,0.12)}
+  .nav.open ul{display:flex;flex-direction:column;background:#fff;position:absolute;left:0;right:0;top:calc(100% + 12px);padding:16px;border-radius:0 0 14px 14px;box-shadow:0 10px 24px rgba(8,42,102,0.14);border-top:1px solid rgba(8,42,102,0.08)}
+  .nav.open li{margin-bottom:10px}
+  .nav.open li:last-child{margin-bottom:0}
   .header-btn{display:none}
-  .nav-toggle{display:block;padding:8px;line-height:1}
+  .nav-toggle{display:block;width:46px;height:46px;border:1px solid rgba(8,42,102,0.12);border-radius:12px;background:rgba(255,255,255,0.96);color:var(--navy);font-size:1.2rem}
   .hero{padding:34px 0 28px}
-  .hero h2{font-size:clamp(2.25rem,10vw,3rem);margin-bottom:14px}
+  .hero-inner{gap:18px}
+  .hero h2{font-size:clamp(2.1rem,10vw,2.8rem);margin-bottom:14px}
   .lead{font-size:.98rem;margin-bottom:20px}
   .hero-ctas{gap:10px}
   .hero-ctas .btn{min-width:0;flex:1;text-align:center}
-  .hero-bg{height:260px;border-radius:20px}
-  .hero-logo{width:175px}
+  .hero-bg{height:240px;border-radius:20px}
+  .hero-logo{width:160px}
   .section{padding:32px 0}
   .section-title{font-size:1.35rem}
   .section-sub{font-size:.96rem}
   .icon-cards{padding:26px 0}
   .icon-cards-row{grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}
-  .icon-card{border-radius:14px;padding:15px 10px}
-  .icon-card img{width:36px;height:36px;margin-bottom:8px}
-  .icon-card span{font-size:.72rem;text-align:center}
-  .catalog-tabs{grid-template-columns:repeat(2,1fr)}
+  .icon-card{border-radius:14px;padding:16px 12px}
+  .icon-card img{width:34px;height:34px;margin-bottom:8px}
+  .icon-card span{font-size:.75rem;text-align:center}
+  .catalog-tabs{grid-template-columns:repeat(2,1fr);gap:10px}
   .catalog-tab{min-height:108px;padding:14px 10px}
   .catalog-panel{padding:20px}
   .catalog-panel ul{grid-template-columns:1fr;gap:9px}
@@ -196,6 +199,18 @@ body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line
   .footer-top-inner{grid-template-columns:1fr;gap:28px}
   .footer-bottom-inner{align-items:flex-start;flex-direction:column;gap:8px}
   .footer-bottom-inner p,.socials{margin:0;font-size:.88rem}
+}
+@media (max-width:560px){
+  .icon-cards-row{grid-template-columns:1fr}
+  .catalog-tabs{grid-template-columns:1fr}
+  .catalog-tab{min-height:100px}
+  .services-layout{grid-template-columns:1fr}
+  .products-grid{grid-template-columns:1fr}
+  .about-contact{order:2}
+  .about-image{order:1}
+  .about-image img{max-width:100%;height:auto}
+  .cta-inner{flex-direction:column;align-items:flex-start}
+  .cta-benefits{gap:12px}
 }
 @media (max-width:380px){
   .brand-text .tag{display:none}
