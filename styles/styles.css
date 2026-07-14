@@ -164,6 +164,8 @@ body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line
 .footer-bottom{background:#08143c;color:#8e9ecf;padding:18px 0}
 .footer-bottom-inner{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 .footer-bottom-inner a{color:#8e9ecf;text-decoration:none}
+.footer-login a{color:rgba(255,255,255,0.55);font-weight:400;text-decoration:none;font-size:1rem;opacity:0.75;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);}
+.footer-login a:hover{opacity:1;color:rgba(255,255,255,0.9);background:rgba(255,255,255,0.14)}
 
 .about-image img{width:100%;border-radius:16px;}
 

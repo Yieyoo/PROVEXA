@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PROVEXA — Login Panel</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/admin.css">
+    <style>
+      .login-wrap{min-height:60vh;display:flex;align-items:center;justify-content:center}
+      .login-card{width:360px;background:#fff;padding:22px;border-radius:12px;box-shadow:0 18px 40px rgba(8,42,102,.12)}
+      .login-card h2{margin:0 0 12px}
+      .form-row{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html">
+          <img src="assets/logo.png" alt="PROVEXA logo" class="logo">
+        </a>
+      </div>
+    </header>
+
+    <main class="container login-wrap">
+      <div class="login-card">
+        <h2>Acceso administrador</h2>
+        <div class="form-row">
+          <label>Usuario
+            <input id="adminUser" type="text" autocomplete="username">
+          </label>
+          <label>Contraseña
+            <input id="adminPass" type="password" autocomplete="current-password">
+          </label>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+          <button id="loginBtn" class="btn primary">Entrar</button>
+        </div>
+        <p id="loginError" style="color:#b00020;margin-top:12px;display:none">Credenciales inválidas</p>
+      </div>
+    </main>
+
+    <script src="scripts/admin-auth.js"></script>
+    <script>
+      document.getElementById('loginBtn').addEventListener('click', function(){
+        var u = document.getElementById('adminUser').value.trim();
+        var p = document.getElementById('adminPass').value;
+        var ok = AdminAuth.login(u,p);
+        if(ok){ location.href = 'admin.html'; } else { document.getElementById('loginError').style.display = 'block'; }
+      });
+      // allow enter key
+      ['adminUser','adminPass'].forEach(function(id){ document.getElementById(id).addEventListener('keydown', function(e){ if(e.key==='Enter') document.getElementById('loginBtn').click(); }); });
+    </script>
+  </body>
+</html>

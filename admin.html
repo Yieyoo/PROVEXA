@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PROVEXA — Panel de control</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/admin.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html">
+          <img src="assets/logo.png" alt="PROVEXA logo" class="logo">
+          <div class="brand-text">
+            <h1>PROVEXA</h1>
+          </div>
+        </a>
+        <nav class="nav">
+          <ul>
+            <li><a href="index.html">Volver</a></li>
+            <li><button id="logoutBtn" class="btn ghost">Cerrar sesión</button></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="admin-panel container" id="adminPanel">
+      <aside class="admin-sidebar" aria-label="Navegación panel">
+        <button class="admin-tab is-active" data-panel="sales">Ventas</button>
+        <button class="admin-tab" data-panel="database">Bases de datos</button>
+        <button class="admin-tab" data-panel="reports">Reportes</button>
+        <button class="admin-tab" data-panel="users">Usuarios</button>
+      </aside>
+
+      <section class="admin-main">
+        <div class="admin-topbar">
+          <div>
+            <p class="eyebrow admin-eyebrow">Panel de control</p>
+            <h1>Administración de ventas</h1>
+            <p class="admin-subtitle">Revisa tus ventas, productos y reportes desde un panel seguro.</p>
+          </div>
+          <div class="admin-summary-cards">
+            <div class="summary-card">
+              <span class="card-label">Ventas totales</span>
+              <strong id="salesTotalCard">$0.00</strong>
+            </div>
+            <div class="summary-card">
+              <span class="card-label">Productos guardados</span>
+              <strong id="productCount">0</strong>
+            </div>
+            <div class="summary-card">
+              <span class="card-label">Sesión</span>
+              <strong>Administrador</strong>
+            </div>
+          </div>
+        </div>
+
+        <section id="sales" class="admin-section">
+          <div class="admin-panel-header">
+            <div>
+              <h2>Ventas recientes</h2>
+              <p class="section-description">Controla las ventas recientes y descarga reportes al instante.</p>
+            </div>
+            <div class="admin-actions">
+              <button id="addSampleSale" class="btn primary">Agregar venta de ejemplo</button>
+              <button id="exportSales" class="btn ghost">Exportar CSV</button>
+            </div>
+          </div>
+          <div class="card sales-entry-card">
+            <div class="sales-input-grid">
+              <div class="form-group">
+                <label for="saleDate">Fecha</label>
+                <input id="saleDate" type="date" class="input-field" />
+              </div>
+              <div class="form-group">
+                <label for="saleCustomer">Cliente</label>
+                <input id="saleCustomer" type="text" class="input-field" placeholder="Nombre del cliente" />
+              </div>
+              <div class="form-group">
+                <label for="saleStatus">Estado</label>
+                <select id="saleStatus" class="input-field">
+                  <option value="En proceso de compra">En proceso de compra</option>
+                  <option value="En proceso de entrega">En proceso de entrega</option>
+                  <option value="Entregado y pagado">Entregado y pagado</option>
+                </select>
+              </div>
+            </div>
+            <div class="order-items-card">
+              <div class="order-items-header">
+                <h3>Artículos del pedido</h3>
+              </div>
+              <div class="order-item-builder">
+                <div class="form-group">
+                  <label for="itemProduct">Producto</label>
+                  <input id="itemProduct" type="text" class="input-field" placeholder="Nombre del producto" />
+                </div>
+                <div class="form-group">
+                  <label for="itemQty">Cantidad</label>
+                  <input id="itemQty" type="number" min="1" step="1" value="1" class="input-field" />
+                </div>
+                <div class="form-group">
+                  <label for="itemPrice">Precio unitario</label>
+                  <input id="itemPrice" type="number" min="0" step="0.01" class="input-field" placeholder="0.00" />
+                </div>
+                <div class="form-group form-builder-actions">
+                  <button id="addOrderItem" class="btn ghost">Agregar artículo</button>
+                </div>
+              </div>
+              <div class="order-item-list card">
+                <table id="orderItemTable" class="table">
+                  <thead>
+                    <tr><th>Producto</th><th>Cantidad</th><th>Precio</th><th>Subtotal</th><th>Acciones</th></tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+              <div class="order-total">Total del pedido: <strong id="orderTotal">$0.00</strong></div>
+            </div>
+            <div class="form-group form-actions">
+              <button id="saveSale" class="btn primary">Guardar pedido</button>
+              <button id="cancelEditSale" class="btn ghost">Cancelar</button>
+            </div>
+          </div>
+          <div class="card">
+            <table id="salesTable" class="table">
+              <thead>
+                <tr><th>Fecha</th><th>Cliente</th><th>Pedido</th><th>Estado</th><th>Total</th><th>Acciones</th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="summary">Total ventas: <strong id="salesTotal">$0.00</strong></div>
+
+          <div id="orderModal" class="modal hidden">
+            <div class="modal-panel">
+              <div class="modal-header">
+                <h2>Detalles del pedido</h2>
+                <button id="closeOrderModal" class="btn ghost small">Cerrar</button>
+              </div>
+              <div class="modal-content">
+                <div class="modal-row"><strong>Fecha:</strong> <span id="modalOrderDate"></span></div>
+                <div class="modal-row"><strong>Cliente:</strong> <span id="modalOrderCustomer"></span></div>
+                <div class="modal-row"><strong>Estado:</strong> <span id="modalOrderStatus"></span></div>
+                <div class="modal-table-wrap card">
+                  <table id="modalOrderTable" class="table">
+                    <thead>
+                      <tr><th>Producto</th><th>Cantidad</th><th>Precio</th><th>Subtotal</th></tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+                <div class="order-total">Total del pedido: <strong id="modalOrderTotal">$0.00</strong></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="database" class="admin-section" hidden>
+          <h2>Productos</h2>
+          <div class="admin-actions">
+            <button id="addSampleProduct" class="btn primary">Agregar producto ejemplo</button>
+            <button id="clearProducts" class="btn ghost">Limpiar lista</button>
+          </div>
+          <div class="card">
+            <ul id="productList" class="product-list"></ul>
+          </div>
+        </section>
+
+        <section id="reports" class="admin-section" hidden>
+          <h2>Reportes</h2>
+          <p>Pronto: gráficos y filtros.</p>
+        </section>
+
+        <section id="users" class="admin-section" hidden>
+          <h2>Usuarios</h2>
+          <p>Administración de accesos y roles.</p>
+        </section>
+      </section>
+    </main>
+
+    <script src="scripts/admin-auth.js"></script>
+    <script>
+      // Require auth to view admin panel
+      if(!AdminAuth.isAuthenticated()){
+        window.location.href = 'admin-login.html';
+      }
+      // expose a logout button
+      document.addEventListener('DOMContentLoaded', function(){
+        var lb = document.getElementById('logoutBtn');
+        if(lb){ lb.addEventListener('click', function(){ AdminAuth.logout(); window.location.href='admin-login.html'; }); }
+      });
+    </script>
+    <script src="scripts/admin.js"></script>
+  </body>
+</html>
