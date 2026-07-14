@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <title>Icono jarcería</title>
-  <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
+  <g fill="none" fill-rule="evenodd">
     <rect width="64" height="64" rx="8" fill="#FFFFFF"/>
-    <g transform="translate(12,8)">
-      <path d="M6 34 L24 16" stroke="#082A66" stroke-width="3" stroke-linecap="round"/>
-      <path d="M3 37 C18 36 30 28 31 22 C31 18 28 15 24 15 C20 15 8 23 3 37 Z" fill="#8D8D8D" opacity="0.15"/>
-      <path d="M18 19 C18 19 28 18 32 22 C35 25 30 30 22 30 C14 30 12 26 12 26" fill="#082A66" opacity="0.08"/>
-      <path d="M2 34 C6 32 10 31 14 31 C18 31 22 33 26 34" stroke="#082A66" stroke-width="2" stroke-linecap="round"/>
-      <path d="M4 36 L26 18" stroke="#082A66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <rect x="0" y="34" width="28" height="6" rx="3" fill="#082A66" opacity="0.08"/>
+    <g transform="translate(16,14)" stroke="#082A66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 4 C8 -4 24 -4 24 4"/>
+      <path d="M2 4 L30 4 L25 34 L7 34 Z"/>
     </g>
   </g>
 </svg>

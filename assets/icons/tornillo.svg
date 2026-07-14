@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" fill-rule="evenodd">
+    <rect width="64" height="64" rx="8" fill="#FFFFFF"/>
+    <g transform="translate(20,7)" stroke="#082A66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="7" r="6"/>
+      <path d="M7 7 H17"/>
+      <path d="M12 13 L12 44"/>
+      <path d="M8 20 L16 24"/>
+      <path d="M8 28 L16 32"/>
+      <path d="M8 36 L16 40"/>
+    </g>
+  </g>
+</svg>
