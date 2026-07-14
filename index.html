@@ -11,7 +11,29 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="PROVEXA | Suministros industriales y empresariales" />
     <meta property="og:description" content="Soluciones integrales de suministro para empresas, industria, oficinas y comercios." />
+    <meta property="og:image" content="assets/logo.png" />
     <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="assets/logo.png" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "PROVEXA",
+      "image": "assets/logo.png",
+      "description": "Suministros empresariales e industriales: limpieza, mantenimiento, herramientas, material eléctrico y más.",
+      "telephone": "+525611660078",
+      "email": "ventasprovexa@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Industrial 123",
+        "addressLocality": "CDMX",
+        "addressCountry": "MX"
+      },
+      "sameAs": [
+        "https://www.facebook.com/people/Provexa/61591657811435/"
+      ]
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
@@ -82,16 +104,16 @@
           <p class="eyebrow">NUESTRO CATÁLOGO</p>
           <h3 class="section-title">Productos para cada operación</h3>
           <p class="section-sub">Explora nuestras principales líneas de suministro y solicita una cotización acorde con tus necesidades.</p>
-          <div class="catalog-tabs" role="tablist" aria-label="Categorías de productos">
-            <button class="catalog-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="limpieza" data-category="limpieza"><img src="assets/icons/jarceria.svg" alt=""><span>Jarciería y limpieza</span><small>9 productos</small></button>
-            <button class="catalog-tab" type="button" role="tab" aria-selected="false" aria-controls="fijacion" data-category="fijacion"><img src="assets/icons/herramientas.svg" alt=""><span>Tornillería y fijación</span><small>8 productos</small></button>
-            <button class="catalog-tab" type="button" role="tab" aria-selected="false" aria-controls="herramientas" data-category="herramientas"><img src="assets/icons/herramientas.svg" alt=""><span>Ferretería y herramienta</span><small>8 productos</small></button>
-            <button class="catalog-tab" type="button" role="tab" aria-selected="false" aria-controls="pinturas" data-category="pinturas"><img src="assets/icons/mas.svg" alt=""><span>Pinturas y recubrimientos</span><small>7 productos</small></button>
-            <button class="catalog-tab" type="button" role="tab" aria-selected="false" aria-controls="electrico" data-category="electrico"><img src="assets/icons/electrico.svg" alt=""><span>Material eléctrico</span><small>8 productos</small></button>
-            <button class="catalog-tab" type="button" role="tab" aria-selected="false" aria-controls="lubricantes" data-category="lubricantes"><img src="assets/icons/mas.svg" alt=""><span>Lubricantes</span><small>5 productos</small></button>
+          <div class="catalog-tabs" role="group" aria-label="Categorías de productos">
+            <button class="catalog-tab is-active" type="button" aria-haspopup="dialog" aria-pressed="true" data-category="limpieza"><img src="assets/icons/jarceria.svg" alt=""><span>Jarciería y limpieza</span><small>9 productos</small></button>
+            <button class="catalog-tab" type="button" aria-haspopup="dialog" aria-pressed="false" data-category="fijacion"><img src="assets/icons/herramientas.svg" alt=""><span>Tornillería y fijación</span><small>8 productos</small></button>
+            <button class="catalog-tab" type="button" aria-haspopup="dialog" aria-pressed="false" data-category="herramientas"><img src="assets/icons/herramientas.svg" alt=""><span>Ferretería y herramienta</span><small>8 productos</small></button>
+            <button class="catalog-tab" type="button" aria-haspopup="dialog" aria-pressed="false" data-category="pinturas"><img src="assets/icons/mas.svg" alt=""><span>Pinturas y recubrimientos</span><small>7 productos</small></button>
+            <button class="catalog-tab" type="button" aria-haspopup="dialog" aria-pressed="false" data-category="electrico"><img src="assets/icons/electrico.svg" alt=""><span>Material eléctrico</span><small>8 productos</small></button>
+            <button class="catalog-tab" type="button" aria-haspopup="dialog" aria-pressed="false" data-category="lubricantes"><img src="assets/icons/mas.svg" alt=""><span>Lubricantes</span><small>5 productos</small></button>
           </div>
           <div class="catalog-panels">
-            <div id="limpieza" class="category catalog-panel" role="tabpanel">
+            <div id="limpieza" class="category catalog-panel" hidden>
               <h4><img src="assets/icons/jarceria.svg" class="cat-icon" alt="Jarcería"> Jarciería y limpieza</h4>
               <ul>
                 <li>Escobas</li>
@@ -106,7 +128,7 @@
               </ul>
             </div>
 
-            <div id="fijacion" class="category catalog-panel" role="tabpanel" hidden>
+            <div id="fijacion" class="category catalog-panel" hidden>
               <h4>🔩 Tornillería y fijación</h4>
               <ul>
                 <li>Tornillos</li>
@@ -120,7 +142,7 @@
               </ul>
             </div>
 
-            <div id="herramientas" class="category catalog-panel" role="tabpanel" hidden>
+            <div id="herramientas" class="category catalog-panel" hidden>
               <h4>🛠️ Ferretería y herramienta</h4>
               <ul>
                 <li>Herramienta manual</li>
@@ -134,7 +156,7 @@
               </ul>
             </div>
 
-            <div id="pinturas" class="category catalog-panel" role="tabpanel" hidden>
+            <div id="pinturas" class="category catalog-panel" hidden>
               <h4>🎨 Pinturas y recubrimientos</h4>
               <ul>
                 <li>Pintura industrial</li>
@@ -147,7 +169,7 @@
               </ul>
             </div>
 
-            <div id="electrico" class="category catalog-panel" role="tabpanel" hidden>
+            <div id="electrico" class="category catalog-panel" hidden>
               <h4>⚡ Material eléctrico</h4>
               <ul>
                 <li>Cable</li>
@@ -161,7 +183,7 @@
               </ul>
             </div>
 
-            <div id="lubricantes" class="category catalog-panel" role="tabpanel" hidden>
+            <div id="lubricantes" class="category catalog-panel" hidden>
               <h4>🛢️ Lubricantes</h4>
               <ul>
                 <li>Aceites industriales</li>
@@ -173,49 +195,9 @@
             </div>
           </div>
 
-          <div id="catalogModal" class="modal-overlay modal-hidden" role="dialog" aria-modal="true" aria-labelledby="catalogModalTitle">
-            <div class="modal">
-              <button type="button" class="modal-close" aria-label="Cerrar" data-close>&times;</button>
-              <h4 id="catalogModalTitle" class="modal-title"></h4>
-              <ul class="modal-list"></ul>
-            </div>
-          </div>
-
           <div class="catalog-cta">
             <p>¿No encuentras lo que necesitas?</p>
             <a href="#contact" class="btn primary">Solicitar una cotización</a>
-          </div>
-        </div>
-      </section>
-
-      <section id="products" class="section light">
-        <div class="container">
-          <h3 class="section-title">Catálogo destacado</h3>
-          <div class="products-grid">
-            <article class="product">
-              <div class="product-image"></div>
-              <h4>Kit de limpieza industrial</h4>
-              <p>Soluciones completas para plantas y bodegas.</p>
-              <a href="#contact" class="btn ghost product-cta">Cotizar producto</a>
-            </article>
-            <article class="product">
-              <div class="product-image"></div>
-              <h4>Cables y conductores</h4>
-              <p>Calidad certificada y envíos a todo México.</p>
-              <a href="#contact" class="btn ghost product-cta">Cotizar producto</a>
-            </article>
-            <article class="product">
-              <div class="product-image"></div>
-              <h4>Herramientas manuales</h4>
-              <p>Marcas reconocidas y garantías.</p>
-              <a href="#contact" class="btn ghost product-cta">Cotizar producto</a>
-            </article>
-            <article class="product">
-              <div class="product-image"></div>
-              <h4>Equipo de seguridad</h4>
-              <p>Protección industrial para tu personal.</p>
-              <a href="#contact" class="btn ghost product-cta">Cotizar producto</a>
-            </article>
           </div>
         </div>
       </section>
@@ -273,8 +255,8 @@
           </div>
           <div class="about-contact" id="contact">
             <h4>Contacto</h4>
-            <p>Email: <a href="mailto:ventas@provexa.mx">ventas@provexa.mx</a></p>
-            <p>Tel: <a href="tel:+5215611660078">+52 1 56 1166 0078</a></p>
+            <p>Email: <a href="mailto:ventasprovexa@gmail.com">ventasprovexa@gmail.com</a></p>
+            <p>Tel: <a href="tel:+525611660078">+52 56 11 66 0078</a></p>
             <form id="contactForm" class="contact-form">
               <label>Nombre
                 <input type="text" name="name" autocomplete="name" required>
@@ -340,8 +322,8 @@
           </div>
           <div class="footer-col">
             <h5>Contacto</h5>
-            <p><a href="tel:+5215611660078">+52  56 1166 0078</a></p>
-            <p><a href="mailto:ventas@provexa.mx">ventas@provexa.mx</a></p>
+            <p><a href="tel:+525611660078">+52 56 11 66 0078</a></p>
+            <p><a href="mailto:ventasprovexa@gmail.com">ventasprovexa@gmail.com</a></p>
             <p>Av. Industrial 123, CDMX</p>
           </div>
         </div>
@@ -349,10 +331,17 @@
       <div class="footer-bottom">
         <div class="container footer-bottom-inner">
           <p>© 2026 PROVEXA. Todos los derechos reservados.</p>
-          <div class="socials">Síguenos: <a href="https://www.facebook.com/people/Provexa/61591657811435/">Facebook</a> · 
-        </div>
+          <div class="socials">Síguenos: <a href="https://www.facebook.com/people/Provexa/61591657811435/">Facebook</a></div>
       </div>
     </footer>
+
+    <div id="catalogModal" class="modal-overlay modal-hidden" role="dialog" aria-modal="true" aria-labelledby="catalogModalTitle">
+      <div class="modal">
+        <button type="button" class="modal-close" aria-label="Cerrar" data-close>&times;</button>
+        <h4 id="catalogModalTitle" class="modal-title"></h4>
+        <ul class="modal-list"></ul>
+      </div>
+    </div>
 
     <script src="scripts/main.js"></script>
   </body>

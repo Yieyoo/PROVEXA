@@ -37,6 +37,7 @@ window.addEventListener('load', resetPageState);
 
 document.addEventListener('DOMContentLoaded', function(){
   resetPageState();
+  document.body.classList.add('page-ready');
 
   var nav = document.getElementById('mainNav');
   var toggle = document.getElementById('navToggle');
@@ -59,19 +60,18 @@ document.addEventListener('DOMContentLoaded', function(){
   var catalogTabs = Array.from(document.querySelectorAll('.catalog-tab'));
   var catalogPanels = Array.from(document.querySelectorAll('.catalog-panel'));
 
-  function selectCategory(category, shouldScroll){
+  function selectCategory(category){
     var selectedPanel = document.getElementById(category);
     if(!selectedPanel || !selectedPanel.classList.contains('catalog-panel')) return;
 
     catalogTabs.forEach(function(tab){
       var isSelected = tab.dataset.category === category;
       tab.classList.toggle('is-active', isSelected);
-      tab.setAttribute('aria-selected', String(isSelected));
+      tab.setAttribute('aria-pressed', String(isSelected));
     });
     catalogPanels.forEach(function(panel){
-      panel.hidden = panel.id !== category;
+      panel.hidden = true;
     });
-    if(shouldScroll) selectedPanel.scrollIntoView({behavior: 'smooth', block: 'start'});
   }
 
   function openCatalogModal(category){
@@ -126,10 +126,10 @@ document.addEventListener('DOMContentLoaded', function(){
     tab.addEventListener('click', function(){
       catalogTabs.forEach(function(other){
         other.classList.remove('is-active');
-        other.setAttribute('aria-selected', 'false');
+        other.setAttribute('aria-pressed', 'false');
       });
       tab.classList.add('is-active');
-      tab.setAttribute('aria-selected', 'true');
+      tab.setAttribute('aria-pressed', 'true');
       openCatalogModal(tab.dataset.category);
     });
   });
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
   function selectCategoryFromHash(){
     var category = window.location.hash.slice(1);
-    if(category) selectCategory(category, true);
+    if(category) selectCategory(category);
   }
   if(window.location.hash){
     selectCategoryFromHash();
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function(){
         return;
       }
 
-      var whatsappNumber = '5215611660078';
+      var whatsappNumber = '525611660078';
       var body = '*Nueva solicitud de cotización desde el sitio web*\n\n' +
         'Nombre: ' + name + '\n' +
         'Empresa: ' + (company || 'No indicada') + '\n' +
