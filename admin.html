@@ -25,7 +25,7 @@
       </div>
     </header>
 
-    <main class="admin-panel container" id="adminPanel">
+    <main class="admin-panel container" id="adminPanel" hidden>
       <aside class="admin-sidebar" aria-label="Navegación panel">
         <button class="admin-tab is-active" data-panel="sales">Ventas</button>
         <button class="admin-tab" data-panel="database">Bases de datos</button>
@@ -93,7 +93,9 @@
               <div class="order-item-builder">
                 <div class="form-group">
                   <label for="itemProduct">Producto</label>
-                  <input id="itemProduct" type="text" class="input-field" placeholder="Nombre del producto" />
+                  <select id="itemProduct" class="input-field">
+                    <option value="">Selecciona un producto</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label for="itemQty">Cantidad</label>
@@ -125,12 +127,12 @@
           <div class="card">
             <table id="salesTable" class="table">
               <thead>
-                <tr><th>Fecha</th><th>Cliente</th><th>Pedido</th><th>Estado</th><th>Total</th><th>Acciones</th></tr>
+                <tr><th>Folio</th><th>Fecha</th><th>Cliente</th><th>Pedido</th><th>Estado</th><th>Total</th><th>Ganancia</th><th>Acciones</th></tr>
               </thead>
               <tbody></tbody>
             </table>
           </div>
-          <div class="summary">Total ventas: <strong id="salesTotal">$0.00</strong></div>
+          <div class="summary">Total ventas: <strong id="salesTotal">$0.00</strong> &nbsp;·&nbsp; Ganancia total: <strong id="salesProfitTotal" class="profit-cell">$0.00</strong></div>
 
           <div id="orderModal" class="modal hidden">
             <div class="modal-panel">
@@ -139,6 +141,7 @@
                 <button id="closeOrderModal" class="btn ghost small">Cerrar</button>
               </div>
               <div class="modal-content">
+                <div class="modal-row"><strong>Folio:</strong> <span id="modalOrderFolio"></span></div>
                 <div class="modal-row"><strong>Fecha:</strong> <span id="modalOrderDate"></span></div>
                 <div class="modal-row"><strong>Cliente:</strong> <span id="modalOrderCustomer"></span></div>
                 <div class="modal-row"><strong>Estado:</strong> <span id="modalOrderStatus"></span></div>
@@ -151,19 +154,68 @@
                   </table>
                 </div>
                 <div class="order-total">Total del pedido: <strong id="modalOrderTotal">$0.00</strong></div>
+                <div class="order-total">Ganancia del pedido: <strong id="modalOrderProfit" class="profit-cell">$0.00</strong></div>
               </div>
             </div>
           </div>
         </section>
 
         <section id="database" class="admin-section" hidden>
-          <h2>Productos</h2>
-          <div class="admin-actions">
-            <button id="addSampleProduct" class="btn primary">Agregar producto ejemplo</button>
-            <button id="clearProducts" class="btn ghost">Limpiar lista</button>
+          <div class="admin-panel-header">
+            <div>
+              <h2>Productos</h2>
+              <p class="section-description">Administra tu catálogo: id, precio de costo, precio de venta y stock disponible.</p>
+            </div>
+            <div class="admin-actions">
+              <button id="clearProducts" class="btn ghost">Limpiar lista</button>
+            </div>
+          </div>
+          <div class="card sales-entry-card">
+            <div class="sales-input-grid">
+              <div class="form-group">
+                <label for="productId">ID</label>
+                <input id="productId" type="text" class="input-field" placeholder="Ej. ESC-001" />
+              </div>
+              <div class="form-group">
+                <label for="productName">Producto</label>
+                <input id="productName" type="text" class="input-field" placeholder="Nombre del producto" />
+              </div>
+              <div class="form-group">
+                <label for="productCategory">Categoría</label>
+                <input id="productCategory" type="text" class="input-field" placeholder="Ej. Limpieza" list="categoryOptions" />
+                <datalist id="categoryOptions"></datalist>
+              </div>
+              <div class="form-group">
+                <label for="productCost">Precio unitario</label>
+                <input id="productCost" type="number" min="0" step="0.01" class="input-field" placeholder="0.00" />
+              </div>
+              <div class="form-group">
+                <label for="productPrice">Precio de venta</label>
+                <input id="productPrice" type="number" min="0" step="0.01" class="input-field" placeholder="0.00" />
+              </div>
+              <div class="form-group">
+                <label for="productStock">Stock</label>
+                <input id="productStock" type="number" min="0" step="1" class="input-field" placeholder="0" />
+              </div>
+              <div class="form-group form-builder-actions">
+                <button id="addProduct" class="btn primary">Agregar producto</button>
+                <button id="cancelEditProduct" class="btn ghost">Cancelar</button>
+              </div>
+            </div>
           </div>
           <div class="card">
-            <ul id="productList" class="product-list"></ul>
+            <div class="form-group category-filter">
+              <label for="categoryFilter">Filtrar por categoría</label>
+              <select id="categoryFilter" class="input-field">
+                <option value="">Todas las categorías</option>
+              </select>
+            </div>
+            <table id="productsTable" class="table">
+              <thead>
+                <tr><th>ID</th><th>Producto</th><th>Categoría</th><th>Precio unitario</th><th>Precio venta</th><th>Stock</th><th>Acciones</th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
           </div>
         </section>
 
@@ -179,16 +231,23 @@
       </section>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="scripts/supabase-client.js"></script>
     <script src="scripts/admin-auth.js"></script>
     <script>
       // Require auth to view admin panel
-      if(!AdminAuth.isAuthenticated()){
-        window.location.href = 'admin-login.html';
-      }
+      (async function(){
+        var authed = await AdminAuth.isAuthenticated();
+        if(!authed){
+          window.location.href = 'admin-login.html';
+          return;
+        }
+        document.getElementById('adminPanel').hidden = false;
+      })();
       // expose a logout button
       document.addEventListener('DOMContentLoaded', function(){
         var lb = document.getElementById('logoutBtn');
-        if(lb){ lb.addEventListener('click', function(){ AdminAuth.logout(); window.location.href='admin-login.html'; }); }
+        if(lb){ lb.addEventListener('click', async function(){ await AdminAuth.logout(); window.location.href='admin-login.html'; }); }
       });
     </script>
     <script src="scripts/admin.js"></script>

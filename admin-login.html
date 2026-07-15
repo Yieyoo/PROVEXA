@@ -26,8 +26,8 @@
       <div class="login-card">
         <h2>Acceso administrador</h2>
         <div class="form-row">
-          <label>Usuario
-            <input id="adminUser" type="text" autocomplete="username">
+          <label>Correo electrónico
+            <input id="adminUser" type="email" autocomplete="email">
           </label>
           <label>Contraseña
             <input id="adminPass" type="password" autocomplete="current-password">
@@ -40,16 +40,28 @@
       </div>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="scripts/supabase-client.js"></script>
     <script src="scripts/admin-auth.js"></script>
     <script>
-      document.getElementById('loginBtn').addEventListener('click', function(){
+      var loginBtn = document.getElementById('loginBtn');
+      loginBtn.addEventListener('click', async function(){
         var u = document.getElementById('adminUser').value.trim();
         var p = document.getElementById('adminPass').value;
-        var ok = AdminAuth.login(u,p);
-        if(ok){ location.href = 'admin.html'; } else { document.getElementById('loginError').style.display = 'block'; }
+        document.getElementById('loginError').style.display = 'none';
+        loginBtn.disabled = true;
+        loginBtn.textContent = 'Entrando...';
+        var ok = await AdminAuth.login(u, p);
+        if(ok){
+          location.href = 'admin.html';
+        } else {
+          document.getElementById('loginError').style.display = 'block';
+          loginBtn.disabled = false;
+          loginBtn.textContent = 'Entrar';
+        }
       });
       // allow enter key
-      ['adminUser','adminPass'].forEach(function(id){ document.getElementById(id).addEventListener('keydown', function(e){ if(e.key==='Enter') document.getElementById('loginBtn').click(); }); });
+      ['adminUser','adminPass'].forEach(function(id){ document.getElementById(id).addEventListener('keydown', function(e){ if(e.key==='Enter') loginBtn.click(); }); });
     </script>
   </body>
 </html>

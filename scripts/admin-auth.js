@@ -1,20 +1,15 @@
-// Simple client-side auth for the admin panel (development only)
+// Real authentication for the admin panel, backed by Supabase Auth.
 var AdminAuth = (function(){
-  var KEY = 'provexa_admin_session_v1';
-  // Default creds — change as needed. For production, implement server-side auth.
-  var DEFAULT_USER = 'admin';
-  var DEFAULT_PASS = 'provexa123';
-
-  function isAuthenticated(){
-    try{ return sessionStorage.getItem(KEY) === '1'; }catch(e){return false}
+  async function isAuthenticated(){
+    var result = await supabaseClient.auth.getSession();
+    return !!(result.data && result.data.session);
   }
-  function login(user, pass){
-    if(user === DEFAULT_USER && pass === DEFAULT_PASS){
-      sessionStorage.setItem(KEY,'1'); return true;
-    }
-    return false;
+  async function login(email, password){
+    var result = await supabaseClient.auth.signInWithPassword({ email: email, password: password });
+    return !result.error;
   }
-  function logout(){ sessionStorage.removeItem(KEY); }
-
-  return { isAuthenticated:isAuthenticated, login:login, logout:logout };
+  async function logout(){
+    await supabaseClient.auth.signOut();
+  }
+  return { isAuthenticated: isAuthenticated, login: login, logout: logout };
 })();
