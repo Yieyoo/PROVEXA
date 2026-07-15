@@ -72,7 +72,7 @@ body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line
   .modal-list{grid-template-columns:1fr}
 }
 .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit}
-.logo{width:78px;height:auto}
+.logo{width:140px;height:auto}
 .brand-text h1{margin:0;font-size:1.2rem;letter-spacing:2px}
 .tag{margin:0;color:var(--silver);font-size:0.72rem;letter-spacing:0.02em;line-height:1.2}
 
