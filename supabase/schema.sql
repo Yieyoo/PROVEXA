@@ -22,6 +22,10 @@ create table if not exists public.sales (
   created_at timestamptz not null default now()
 );
 
+grant usage on schema public to authenticated;
+grant select, insert, update, delete on public.products to authenticated;
+grant select, insert, update, delete on public.sales to authenticated;
+
 alter table public.products enable row level security;
 alter table public.sales enable row level security;
 
