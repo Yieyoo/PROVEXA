@@ -59,6 +59,7 @@
     var tbody = $('#salesTable tbody'); tbody.innerHTML = '';
     var total = 0;
     var profitTotal = 0;
+    var closedTotal = 0;
     sales.forEach(function(s, index){
       var orderSummary = renderOrderSummary(s.items);
       var profit = calculateOrderProfit(s.items || []);
@@ -73,11 +74,14 @@
       tbody.appendChild(tr);
       total += Number(s.total)||0;
       profitTotal += profit;
+      if(s.status === 'Entregado y pagado'){ closedTotal += Number(s.total)||0; }
     });
     var totalText = '$' + total.toFixed(2);
     $('#salesTotal').textContent = totalText;
     $('#salesTotalCard').textContent = totalText;
     $('#salesProfitTotal').textContent = '$' + profitTotal.toFixed(2);
+    $('#profitTotalCard').textContent = '$' + profitTotal.toFixed(2);
+    $('#closedSalesCard').textContent = '$' + closedTotal.toFixed(2);
     bindSaleRowActions();
   }
 
@@ -353,24 +357,6 @@
     $('#addProduct').textContent = 'Agregar producto';
   }
 
-  async function addSampleSale(){
-    var samplePrice = Math.round(Math.random()*500+50);
-    var sampleItems = [
-      {product: 'Producto demo', qty: 1, price: samplePrice, costPrice: Math.round(samplePrice*0.7)}
-    ];
-    var payload = {
-      date: new Date().toISOString().slice(0,10),
-      customer: 'Cliente demo',
-      items: sampleItems,
-      status: 'En proceso de compra',
-      total: calculateOrderTotal(sampleItems)
-    };
-    var result = await supabaseClient.from('sales').insert(payload).select().single();
-    if(result.error){ alert('No se pudo agregar la venta de ejemplo: ' + result.error.message); return; }
-    sales.unshift(saleFromDb(result.data));
-    renderSales();
-  }
-
   async function createSaleFromForm(){
     var date = $('#saleDate').value;
     var customer = $('#saleCustomer').value.trim();
@@ -444,12 +430,23 @@
     $all('.admin-tab').forEach(function(b){ b.classList.toggle('is-active', b.dataset.panel===name); });
   }
 
+  var sessionNicknames = {
+    'alejandrorafaelsl1@outlook.com': 'Chalán'
+  };
+
+  async function showSessionLabel(){
+    var result = await supabaseClient.auth.getSession();
+    var email = result.data && result.data.session ? result.data.session.user.email : '';
+    var label = sessionNicknames[email] || 'Administrador';
+    $('#sessionLabel').textContent = label;
+  }
+
   document.addEventListener('DOMContentLoaded', function(){
     resetSaleForm();
     loadSales();
     loadProducts();
+    showSessionLabel();
     $all('.admin-tab').forEach(function(btn){ btn.addEventListener('click', function(){ switchPanel(btn.dataset.panel); }); });
-    $('#addSampleSale').addEventListener('click', addSampleSale);
     $('#itemProduct').addEventListener('change', fillPriceFromSelectedProduct);
     $('#addOrderItem').addEventListener('click', function(e){ e.preventDefault(); addOrderItem(); });
     $('#saveSale').addEventListener('click', function(e){ e.preventDefault(); createSaleFromForm(); });
