@@ -16,23 +16,24 @@
             <h1>PROVEXA</h1>
           </div>
         </a>
-        <nav class="nav">
-          <ul>
-            <li><a href="index.html">Volver</a></li>
-            <li><button id="logoutBtn" class="btn ghost">Cerrar sesión</button></li>
-          </ul>
-        </nav>
+        <div class="admin-header-right">
+          <nav class="admin-header-tabs" aria-label="Navegación panel">
+            <button class="admin-tab is-active" data-panel="sales">Ventas</button>
+            <button class="admin-tab" data-panel="database">Bases de datos</button>
+            <button class="admin-tab" data-panel="reports">Reportes</button>
+            <button class="admin-tab" data-panel="users">Usuarios</button>
+          </nav>
+          <nav class="nav">
+            <ul>
+              <li><a href="index.html">Volver</a></li>
+              <li><button id="logoutBtn" class="btn ghost">Cerrar sesión</button></li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </header>
 
     <main class="admin-panel container" id="adminPanel" hidden>
-      <aside class="admin-sidebar" aria-label="Navegación panel">
-        <button class="admin-tab is-active" data-panel="sales">Ventas</button>
-        <button class="admin-tab" data-panel="database">Bases de datos</button>
-        <button class="admin-tab" data-panel="reports">Reportes</button>
-        <button class="admin-tab" data-panel="users">Usuarios</button>
-      </aside>
-
       <section class="admin-main">
         <div class="admin-topbar">
           <div>

@@ -1,9 +1,10 @@
 /* Admin panel styles */
-.admin-panel{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:32px 0;align-items:flex-start}
-.admin-sidebar{position:sticky;top:120px;background:#fff;border:1px solid #eef2f6;border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:6px;box-shadow:0 18px 46px rgba(8,42,102,.08)}
-.admin-sidebar .admin-tab{background:transparent;border:1px solid transparent;border-radius:10px;padding:10px 14px;font-size:.92rem;text-align:left;cursor:pointer;font-weight:700;color:var(--navy);transition:all .25s ease}
-.admin-sidebar .admin-tab:hover{background:#f4f7ff}
-.admin-sidebar .admin-tab.is-active{background:var(--navy);color:#fff;box-shadow:0 14px 34px rgba(8,42,102,.12);border-color:rgba(255,255,255,.15)}
+.admin-panel{display:flex;flex-direction:column;gap:24px;padding:32px 0}
+.admin-header-right{display:flex;align-items:center;gap:28px}
+.admin-header-tabs{display:flex;gap:4px;flex-wrap:wrap}
+.admin-header-tabs .admin-tab{flex-shrink:0;background:transparent;border:1px solid transparent;border-radius:10px;padding:8px 14px;font-size:.88rem;white-space:nowrap;cursor:pointer;font-weight:700;color:var(--navy);transition:all .25s ease}
+.admin-header-tabs .admin-tab:hover{background:#f4f7ff}
+.admin-header-tabs .admin-tab.is-active{background:var(--navy);color:#fff;box-shadow:0 10px 22px rgba(8,42,102,.14)}
 .admin-main{display:flex;flex-direction:column;gap:26px;min-width:0}
 .admin-topbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:16px}
 .admin-eyebrow{margin:0;color:#0f3b75;font-size:.82rem;letter-spacing:.15em;text-transform:uppercase;font-weight:800}
@@ -59,14 +60,13 @@
 .profit-cell{color:#1d8a4a;font-weight:700}
 
 @media (max-width:1100px){
-  .admin-panel{grid-template-columns:1fr}
-  .admin-sidebar{position:relative;top:0}
   .admin-topbar{flex-direction:column;align-items:flex-start}
 }
 
 @media (max-width:720px){
   .admin-summary-cards{flex-direction:column}
   .admin-actions{flex-direction:column}
-  .admin-sidebar{padding:14px}
+  .admin-header-right{flex-wrap:wrap;gap:10px}
+  .admin-header-tabs{order:2;width:100%}
   .summary-card{min-width:100%}
 }
