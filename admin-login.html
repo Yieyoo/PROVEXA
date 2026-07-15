@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="styles/admin.css">
     <style>
-      .login-wrap{min-height:60vh;display:flex;align-items:center;justify-content:center}
-      .login-card{width:360px;background:#fff;padding:22px;border-radius:12px;box-shadow:0 18px 40px rgba(8,42,102,.12)}
-      .login-card h2{margin:0 0 12px}
-      .form-row{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+      .login-wrap{min-height:60vh;display:flex;align-items:center;justify-content:center;padding:20px 0}
+      .login-card{width:min(360px, 100%);background:#fff;padding:24px;border-radius:16px;box-shadow:0 18px 40px rgba(8,42,102,.12)}
+      .login-card h2{margin:0 0 18px;color:var(--navy)}
+      .form-row{display:flex;flex-direction:column;gap:14px;margin-bottom:18px}
     </style>
   </head>
   <body>
@@ -26,12 +26,14 @@
       <div class="login-card">
         <h2>Acceso administrador</h2>
         <div class="form-row">
-          <label>Correo electrónico
-            <input id="adminUser" type="email" autocomplete="email">
-          </label>
-          <label>Contraseña
-            <input id="adminPass" type="password" autocomplete="current-password">
-          </label>
+          <div class="form-group">
+            <label for="adminUser">Correo electrónico</label>
+            <input id="adminUser" type="email" autocomplete="email" class="input-field">
+          </div>
+          <div class="form-group">
+            <label for="adminPass">Contraseña</label>
+            <input id="adminPass" type="password" autocomplete="current-password" class="input-field">
+          </div>
         </div>
         <div style="display:flex;gap:8px;justify-content:flex-end">
           <button id="loginBtn" class="btn primary">Entrar</button>

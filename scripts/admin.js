@@ -59,7 +59,7 @@
     var tbody = $('#salesTable tbody'); tbody.innerHTML = '';
     var total = 0;
     var profitTotal = 0;
-    var closedTotal = 0;
+    var closedCount = 0;
     sales.forEach(function(s, index){
       var orderSummary = renderOrderSummary(s.items);
       var profit = calculateOrderProfit(s.items || []);
@@ -74,14 +74,14 @@
       tbody.appendChild(tr);
       total += Number(s.total)||0;
       profitTotal += profit;
-      if(s.status === 'Entregado y pagado'){ closedTotal += Number(s.total)||0; }
+      if(s.status === 'Entregado y pagado'){ closedCount += 1; }
     });
     var totalText = '$' + total.toFixed(2);
     $('#salesTotal').textContent = totalText;
     $('#salesTotalCard').textContent = totalText;
     $('#salesProfitTotal').textContent = '$' + profitTotal.toFixed(2);
     $('#profitTotalCard').textContent = '$' + profitTotal.toFixed(2);
-    $('#closedSalesCard').textContent = '$' + closedTotal.toFixed(2);
+    $('#closedSalesCard').textContent = String(closedCount);
     bindSaleRowActions();
   }
 

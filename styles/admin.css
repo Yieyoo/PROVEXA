@@ -1,6 +1,7 @@
 /* Admin panel styles */
 .admin-panel{display:flex;flex-direction:column;gap:24px;padding:32px 0}
-.admin-header-right{display:flex;align-items:center;gap:28px}
+.admin-header-right{display:flex;align-items:center;gap:20px}
+.session-greeting{font-size:.85rem;font-weight:700;color:var(--navy);white-space:nowrap;padding:6px 12px;background:#f4f7ff;border-radius:999px}
 .admin-header-tabs{display:flex;gap:4px;flex-wrap:wrap}
 .admin-header-tabs .admin-tab{flex-shrink:0;background:transparent;border:1px solid transparent;border-radius:10px;padding:8px 14px;font-size:.88rem;white-space:nowrap;cursor:pointer;font-weight:700;color:var(--navy);transition:all .25s ease}
 .admin-header-tabs .admin-tab:hover{background:#f4f7ff}
@@ -59,14 +60,29 @@
 .summary{margin-top:18px;font-weight:700;color:#142847;font-size:1rem}
 .profit-cell{color:#1d8a4a;font-weight:700}
 
+/* The site-wide mobile nav (styles.css) hides .nav ul below 960px — the admin
+   header only has 2 links in it (Volver / Cerrar sesión), so keep it visible
+   here instead of building a second hamburger menu just for this page. */
+.site-header .nav ul{display:flex}
+
 @media (max-width:1100px){
   .admin-topbar{flex-direction:column;align-items:flex-start}
+  .admin-panel-header{flex-direction:column;align-items:flex-start}
+  .admin-actions{width:100%}
 }
 
 @media (max-width:720px){
-  .admin-summary-cards{flex-direction:column}
+  .admin-summary-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .summary-card{padding:14px 16px;border-radius:14px;min-width:0}
+  .card-label{font-size:.72rem;margin-bottom:6px}
+  .summary-card strong{font-size:1.15rem}
   .admin-actions{flex-direction:column}
-  .admin-header-right{flex-wrap:wrap;gap:10px}
-  .admin-header-tabs{order:2;width:100%}
-  .summary-card{min-width:100%}
+  .admin-actions .btn{width:100%;text-align:center}
+  .header-inner{flex-wrap:wrap;row-gap:10px}
+  .admin-header-right{width:100%;flex-wrap:wrap;justify-content:space-between;gap:10px}
+  .admin-header-tabs{order:2;width:100%;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px}
+  .session-greeting{order:1}
+  .nav{order:3}
+  .nav ul{gap:10px}
+  .nav li:first-child{display:none}
 }
