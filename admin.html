@@ -160,6 +160,9 @@
                 </div>
                 <div class="order-total">Total del pedido: <strong id="modalOrderTotal">$0.00</strong></div>
                 <div class="order-total">Ganancia del pedido: <strong id="modalOrderProfit" class="profit-cell">$0.00</strong></div>
+                <div class="modal-actions">
+                  <button id="downloadTicket" class="btn primary">Descargar ticket</button>
+                </div>
               </div>
             </div>
           </div>
@@ -255,6 +258,7 @@
         if(lb){ lb.addEventListener('click', async function(){ await AdminAuth.logout(); window.location.href='admin-login.html'; }); }
       });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
     <script src="scripts/admin.js"></script>
   </body>
 </html>

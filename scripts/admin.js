@@ -143,8 +143,11 @@
     sales[index].status = status;
   }
 
+  var currentModalSale = null;
+
   function viewOrderDetails(index){
     var sale = sales[index];
+    currentModalSale = sale;
     $('#modalOrderFolio').textContent = formatFolio(sale.folio);
     $('#modalOrderDate').textContent = formatDate(sale.date);
     $('#modalOrderCustomer').textContent = sale.customer;
@@ -154,6 +157,89 @@
     $('#modalOrderTotal').textContent = '$' + Number(sale.total).toFixed(2);
     $('#modalOrderProfit').textContent = '$' + profit.toFixed(2);
     document.getElementById('orderModal').classList.remove('hidden');
+  }
+
+  function downloadTicket(){
+    if(!currentModalSale) return;
+    var sale = currentModalSale;
+    var jsPDF = window.jspdf.jsPDF;
+    var doc = new jsPDF({unit: 'pt', format: 'a4'});
+    var pageWidth = doc.internal.pageSize.getWidth();
+    var margin = 48;
+    var y = 60;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(20);
+    doc.setTextColor(8, 42, 102);
+    doc.text('PROVEXA', margin, y);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(120, 120, 120);
+    y += 16;
+    doc.text('Suministros industriales y empresariales', margin, y);
+    y += 14;
+    doc.text('ventasprovexa@gmail.com  ·  +52 56 11 66 0078', margin, y);
+
+    doc.setDrawColor(220, 229, 241);
+    y += 16;
+    doc.line(margin, y, pageWidth - margin, y);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(14);
+    doc.setTextColor(8, 42, 102);
+    y += 28;
+    doc.text('Ticket de venta', margin, y);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(40, 40, 40);
+    y += 24;
+    doc.text('Folio: ' + formatFolio(sale.folio), margin, y);
+    doc.text('Fecha: ' + formatDate(sale.date), pageWidth - margin, y, {align: 'right'});
+    y += 16;
+    doc.text('Cliente: ' + sale.customer, margin, y);
+    y += 16;
+    doc.text('Estado: ' + sale.status, margin, y);
+
+    y += 26;
+    var col1 = margin, col2 = margin + 240, col3 = margin + 340, col4 = pageWidth - margin;
+    doc.setFont('helvetica', 'bold');
+    doc.text('Producto', col1, y);
+    doc.text('Cantidad', col2, y);
+    doc.text('Precio', col3, y);
+    doc.text('Subtotal', col4, y, {align: 'right'});
+    y += 8;
+    doc.setDrawColor(220, 229, 241);
+    doc.line(margin, y, pageWidth - margin, y);
+
+    doc.setFont('helvetica', 'normal');
+    (sale.items || []).forEach(function(item){
+      y += 20;
+      var subtotal = Number(item.qty) * Number(item.price);
+      doc.text(String(item.product), col1, y);
+      doc.text(String(item.qty), col2, y);
+      doc.text('$' + Number(item.price).toFixed(2), col3, y);
+      doc.text('$' + subtotal.toFixed(2), col4, y, {align: 'right'});
+    });
+
+    y += 16;
+    doc.setDrawColor(220, 229, 241);
+    doc.line(margin, y, pageWidth - margin, y);
+
+    y += 26;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(13);
+    doc.setTextColor(8, 42, 102);
+    doc.text('Total: $' + Number(sale.total).toFixed(2), pageWidth - margin, y, {align: 'right'});
+
+    y += 40;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(140, 140, 140);
+    doc.text('Gracias por tu compra en PROVEXA.', margin, y);
+
+    doc.save('ticket-' + formatFolio(sale.folio) + '.pdf');
   }
 
   function renderModalOrderItems(items){
@@ -452,6 +538,7 @@
     $('#saveSale').addEventListener('click', function(e){ e.preventDefault(); createSaleFromForm(); });
     $('#cancelEditSale').addEventListener('click', function(e){ e.preventDefault(); resetSaleForm(); });
     $('#closeOrderModal').addEventListener('click', function(){ closeOrderModal(); });
+    $('#downloadTicket').addEventListener('click', downloadTicket);
     $('#orderModal').addEventListener('click', function(e){ if(e.target.id === 'orderModal') closeOrderModal(); });
     $('#exportSales').addEventListener('click', exportSalesCSV);
     $('#addProduct').addEventListener('click', function(e){ e.preventDefault(); saveProduct(); });
